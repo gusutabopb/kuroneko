@@ -2,11 +2,13 @@
 
 ヤマト運輸の荷物追跡を行うための簡単なCLIツール。
 
+Python環境(v2.7, v3.5+)が必要です。
+
 ## インストール
 
 ```bash
 $ git clone https://github.com/gusutabopb/kuroneko.git
-$ pip install kuroneko
+$ pip install ./kuroneko
 ```
 
 ## 使い方
