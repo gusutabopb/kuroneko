@@ -14,16 +14,16 @@ $ pip install ./kuroneko
 ## 使い方
 
 ```text
-usage: kuroneko [-h] [--ascii] tracking_codes [tracking_codes ...]
+usage: kuroneko [-h] [--ascii] tracking_code [tracking_code ...]
 
 Get delivery status of takyubin package
 
 positional arguments:
-  tracking_codes  Tracking codes
+  tracking_code  Tracking code(s)
 
 optional arguments:
-  -h, --help      show this help message and exit
-  --ascii         Print using ASCII characters only
+  -h, --help     show this help message and exit
+  --ascii        Print using ASCII characters only
 ```
 
 ![](https://user-images.githubusercontent.com/4231387/71304052-3f60d080-2404-11ea-902e-af18c572bd4b.gif)

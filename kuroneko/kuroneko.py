@@ -9,15 +9,12 @@ import terminaltables
 from bs4 import BeautifulSoup
 
 
-def fetch_data(tracking_codes):
-    cleanup = lambda s: "-".join(re.findall(".{1,4}", re.sub("[^0-9]", "", s)))
-    codes = [cleanup(code) for code in tracking_codes]
-    form_data = {"number{:02d}".format(i + 1): code for i, code in enumerate(codes)}
+def fetch_data(*codes):
+    form_data = {"number{:02d}".format(i + 1): c for i, c in enumerate(codes)}
     form_data["number00"] = 1
     r = requests.post("https://toi.kuronekoyamato.co.jp/cgi-bin/tneko", form_data)
     soup = BeautifulSoup(r.text, "html.parser")
-    tables = soup.find_all("table", class_="meisai")
-    return codes, tables
+    return soup.find_all("table", class_="meisai")
 
 
 def parse_table(table):
@@ -33,14 +30,15 @@ def parse_table(table):
 
 def main():
     parser = argparse.ArgumentParser(description="Get delivery status of takyubin package")
-    parser.add_argument("tracking_codes", nargs="+", action="store", type=str,
-                        help="Tracking codes")
+    parser.add_argument("tracking_code", nargs="+", action="store", type=str,
+                        help="Tracking code(s)")
     parser.add_argument("--ascii", action="store_true",
                         help="Print using ASCII characters only")
     args = parser.parse_args()
 
-    codes, tables = fetch_data(args.tracking_codes)
-    for i, (code, table) in enumerate(zip(codes, tables)):
+    tables = fetch_data(*args.tracking_code)
+    for i, (code, table) in enumerate(zip(args.tracking_code, tables)):
+        code = "-".join(re.findall(".{1,4}", re.sub("[^0-9]", "", code)))
         headers, lines = parse_table(table)
         print("{:d}件目 {}".format(i + 1, code))
         if args.ascii:
