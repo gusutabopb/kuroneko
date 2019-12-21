@@ -23,3 +23,5 @@ optional arguments:
   -h, --help      show this help message and exit
   --ascii         Print using ASCII characters only
 ```
+
+![](https://user-images.githubusercontent.com/4231387/71304052-3f60d080-2404-11ea-902e-af18c572bd4b.gif)
